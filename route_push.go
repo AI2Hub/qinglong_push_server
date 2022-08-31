@@ -69,8 +69,6 @@ func routeDoPush(c *fiber.Ctx) error {
 	return push(c, params)
 }
 
-var whiteList = []string{"青龙客户端", "登录通知", "过期", "cookie已失效"}
-
 func in(str string, s []string) bool {
 
 	for _, v := range s {
@@ -87,7 +85,7 @@ func canPush(c *fiber.Ctx) bool {
 	var title, _ = url.QueryUnescape(c.Params("title"))
 
 	if title != "" && len(title) > 0 {
-		var result = in(title, whiteList)
+		var result = in(title, whiteList())
 		if result {
 			return true
 		}
@@ -95,7 +93,7 @@ func canPush(c *fiber.Ctx) bool {
 
 	var desc, _ = url.QueryUnescape(c.Params("body"))
 	if desc != "" && len(desc) > 0 {
-		var result2 = in(desc, whiteList)
+		var result2 = in(desc, whiteList())
 		if result2 {
 			return true
 		}

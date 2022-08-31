@@ -1,0 +1,1 @@
+nohup ./bark-server > log.log 2>&1 &
